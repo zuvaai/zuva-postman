@@ -377,59 +377,6 @@
 							"body": "[\n    {\n        \"field_id\": \"00333a5d-0d92-42f5-b4d6-2488d5768bc8\",\n        \"name\": \"e\",\n        \"description\": \"\",\n        \"bias\": 0,\n        \"f_score\": 0,\n        \"precision\": 0,\n        \"recall\": 0,\n        \"document_count\": 0,\n        \"is_custom\": false\n    }\n]"
 						}
 					]
-				},
-				{
-					"name": "Load 5 Fields to Environment Variable",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"",
-									"field_names = [\"Date\", \"Parties\", \"Change of Control\", \"Indemnity\", \"Governing Law\"]",
-									"field_ids = []",
-									"",
-									"for (var i = 0; i < jsonData.length; i++) {",
-									"    var obj = jsonData[i]",
-									"    var field_name = obj[\"name\"]",
-									"    ",
-									"    if (field_names.includes(field_name)) {",
-									"        field_ids.push('\"' + obj[\"field_id\"] + '\"')",
-									"    }",
-									"}",
-									"",
-									"pm.test(\"Retrieved the expected number of fields (\" + field_names.length + \")\", () => {",
-									"    pm.expect(field_ids).to.have.lengthOf(field_names.length)",
-									"})",
-									"",
-									"",
-									"pm.environment.set(\"field_ids\", field_ids)",
-									"pm.test(\"Environment variable was set with the expected number of fields (\" + field_names.length + \")\", () => {",
-									"    env_field_ids = pm.environment.get(\"field_ids\");",
-									"    pm.expect(env_field_ids).to.have.lengthOf(field_names.length)",
-									"})",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{zdai-base-url}}/fields",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"fields"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -1192,6 +1139,62 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"baseurl = pm.environment.get(\"zdai-base-url\");",
+									"field_ids = pm.environment.get(\"field_ids\")",
+									"",
+									"if (field_ids == null || field_ids == \"\") {",
+									"    console.log(\"Environment variable field_ids not found, fetching fields from DocAI.\")",
+									"    pm.sendRequest({",
+									"        url: baseurl + \"/fields\",",
+									"        method: 'GET',",
+									"        header: {",
+									"            \"Authorization\": `Bearer ${pm.environment.get('token')}`,",
+									"            \"Content-Type\": \"application/json\"",
+									"        }",
+									"    }, function (err, res) {",
+									"        if (err) {",
+									"            throw new Error(err);",
+									"        } else {",
+									"            var jsonData = res.json();",
+									"",
+									"            field_names = [\"Date\", \"Parties\", \"Change of Control\", \"Indemnity\", \"Governing Law\"]",
+									"            field_ids = []",
+									"",
+									"            for (var i = 0; i < jsonData.length; i++) {",
+									"                var obj = jsonData[i]",
+									"                var field_name = obj[\"name\"]",
+									"                ",
+									"                if (field_names.includes(field_name)) {",
+									"                    field_ids.push('\"' + obj[\"field_id\"] + '\"')",
+									"                }",
+									"            }",
+									"",
+									"            pm.test(\"Retrieved the expected number of fields (\" + field_names.length + \")\", () => {",
+									"                pm.expect(field_ids).to.have.lengthOf(field_names.length)",
+									"            })",
+									"",
+									"            pm.environment.set(\"field_ids\", field_ids)",
+									"            pm.test(\"Environment variable was set with the expected number of fields (\" + field_names.length + \")\", () => {",
+									"                env_field_ids = pm.environment.get(\"field_ids\");",
+									"                pm.expect(env_field_ids).to.have.lengthOf(field_names.length)",
+									"            })",
+									"        }",
+									"    });",
+									"} else {",
+									"    console.log(\"GET /fields not called — found field_ids in environment variables.\")",
+									"}",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -1330,7 +1333,7 @@
 							"_postman_previewlanguage": null,
 							"header": null,
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e463f1qk154j5e3sjg\"\n}"
+							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e463f1qk154j5e3sjg\"\n}"
 						},
 						{
 							"name": "Field Extraction Request Queued",
