@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d640f221-dac8-4f9f-b3b9-9c47e96fbedb",
+		"_postman_id": "d061513b-0716-475e-8f20-a08616c28797",
 		"name": "Zuva DocAI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -876,8 +876,10 @@
 									]
 								}
 							},
+							"status": "Created",
+							"code": 201,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\"\n}"
 						}
@@ -966,7 +968,7 @@
 							"status": "Accepted",
 							"code": 202,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"queued\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
 						}
@@ -987,7 +989,6 @@
 									"",
 									"pm.test(\"The field training status response contains a status.\", function () {",
 									"    pm.expect(jsonData).to.have.property(\"status\");",
-									"    pm.environment.set(\"field_training_request_id\", jsonData[\"status\"]);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1029,8 +1030,10 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"complete\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
 						},
@@ -1052,8 +1055,10 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"processing\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
 						},
@@ -1075,8 +1080,10 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"failed\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
 						},
@@ -1098,8 +1105,10 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"queued\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
 						}
@@ -1164,8 +1173,10 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"name\": \"Custom Field Postman\",\n    \"description\": \"This field was created as part of a Postman API call\",\n    \"read_only\": false,\n    \"is_trained\": true,\n    \"file_ids\": [\"c71pmdbo2ua691f0fkog\"]\n}"
 						}
@@ -1246,10 +1257,10 @@
 							},
 							"status": "No Content",
 							"code": 204,
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
-							"body": null
+							"body": ""
 						}
 					]
 				},
@@ -1309,8 +1320,10 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": null,
+							"header": [],
 							"cookie": [],
 							"body": "{\n    \"f_score\": 0.95,\n    \"precision\": 0.9,\n    \"recall\": 1\n}"
 						}
