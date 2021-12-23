@@ -814,7 +814,8 @@
 									"    pm.response.to.have.status(201);",
 									"});",
 									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
+									"pm.test(\"The response contains a field_id.\", function () {",
+									"    pm.expect(jsonData).to.have.property(\"field_id\");",
 									"    pm.environment.set(\"training_field_id\", jsonData[\"field_id\"]);",
 									"});"
 								],
@@ -882,6 +883,110 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\"\n}"
+						},
+						{
+							"name": "Create Field without field name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"This field was created as part of a Postman API call\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/fields",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "81"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 18:41:49 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "3"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"missing-field-name\",\n        \"message\": \"a field name must be provided\"\n    }\n}"
+						},
+						{
+							"name": "Create Field with malformed request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"field_name\": \"Custom Field Postman\",\n    \"description\": \"This field was created as part of a Postman API call\",\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/fields",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "85"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 18:45:29 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "3"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"request-invalid\",\n        \"message\": \"the request body contents is invalid\"\n    }\n}"
 						}
 					]
 				},
@@ -971,6 +1076,60 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"queued\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
+						},
+						{
+							"name": "Field Training Ongoing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"file_id\":\"c71pmdbo2ua691f0fkog\",\n        \"locations\":[\n            {\"start\":26952,\"end\":27310}\n        ]\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/train",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"train"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "135"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 18:48:14 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "806"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-being-trained\",\n        \"message\": \"The field ID 2efa79d4-854d-46de-8087-f70778157dbf has an on-going training session\"\n    }\n}"
 						}
 					]
 				},
@@ -1111,6 +1270,52 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"status\": \"queued\",\n    \"request_id\": \"c71qfbbo2ua8dqja2d70\"\n}"
+						},
+						{
+							"name": "Field Training Request Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/train/{{field_training_request_id}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"train",
+										"{{field_training_request_id}}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "103"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 18:50:49 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "268"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"request-id-not-found\",\n        \"message\": \"The request ID c71qfbbo2ua8dqja2d70 was not found\"\n    }\n}"
 						}
 					]
 				},
@@ -1179,6 +1384,96 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"2efa79d4-854d-46de-8087-f70778157dbf\",\n    \"name\": \"Custom Field Postman\",\n    \"description\": \"This field was created as part of a Postman API call\",\n    \"read_only\": false,\n    \"is_trained\": true,\n    \"file_ids\": [\"c71pmdbo2ua691f0fkog\"]\n}"
+						},
+						{
+							"name": "Get Field Metadata Invalid",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/metadata",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"metadata"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "105"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 18:59:35 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "4"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-id-invalid\",\n        \"message\": \"the field ID 2efa79d4-46de-8087-f70778157dbf is invalid\"\n    }\n}"
+						},
+						{
+							"name": "Get Field Metadata Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/metadata",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"metadata"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "105"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 18:59:35 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "4"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-id-not-found\",\n        \"message\": \"the field ID 2efa79d4-46de-8087-f70778157dbf was not found\"\n    }\n}"
 						}
 					]
 				},
@@ -1261,6 +1556,114 @@
 							"header": [],
 							"cookie": [],
 							"body": ""
+						},
+						{
+							"name": "Update Field Metadata Read-Only",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated Postman Field Name Update\",\n    \"description\": \"Updated Postman Field Description Update\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/metadata",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"metadata"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "114"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 19:06:12 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "255"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-id-read-only\",\n        \"message\": \"the field ID 005801fc-495f-4599-9a84-d02360c442d9 is read only\"\n    }\n}"
+						},
+						{
+							"name": "Update Field Metadata Not Found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Updated Postman Field Name Update\",\n    \"description\": \"Updated Postman Field Description Update\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/metadata",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"metadata"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "115"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 23 Dec 2021 19:08:11 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "308"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-id-not-found\",\n        \"message\": \"the field ID 005801fc-495f-4599-9a84-d02360c442d8 was not found\"\n    }\n}"
 						}
 					]
 				},
@@ -1326,6 +1729,113 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"f_score\": 0.95,\n    \"precision\": 0.9,\n    \"recall\": 1\n}"
+						},
+						{
+							"name": "Get Field Accuracy Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/accuracy",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"accuracy"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-id-not-found\",\n        \"message\": \"the field ID 005801fc-495f-4599-9a84-d02360c442d8 was not found\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Field Validation Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"The field validation details request was successful.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/validation-details",
+							"host": [
+								"{{zdai-base-url}}"
+							],
+							"path": [
+								"fields",
+								"{{training_field_id}}",
+								"validation-details"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Validation Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/validation-details",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"validation-details"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "[\n    {\n        \"file_id\": \"c71pmdbo2ua691f0fkog\",\n        \"type\": \"tp\",\n        \"location\": [\n            26952,\n            27310\n        ]\n    }\n]"
+						},
+						{
+							"name": "Get Validation Details Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/fields/{{training_field_id}}/validation-details",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"fields",
+										"{{training_field_id}}",
+										"validation-details"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"field-id-not-found\",\n        \"message\": \"the field ID 005801fc-495f-4599-9a84-d02360c442d8 was not found\"\n    }\n}"
 						}
 					]
 				}
