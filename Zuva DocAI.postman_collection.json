@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d061513b-0716-475e-8f20-a08616c28797",
+		"_postman_id": "12615108-3f98-4237-b8bd-2b1840519119",
 		"name": "Zuva DocAI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1928,7 +1928,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"file_ids\": [\n        \"{{file_id}}\"\n    ],\n    \"field_ids\": [\n        \"668ee3b5-e15a-439f-9475-05a21755a5c1\"\n    ]\n}",
+							"raw": "{\n    \"file_ids\": [\n        \"{{file_id}}\"\n    ],\n    \"field_ids\": [\n        {{field_ids}}\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
