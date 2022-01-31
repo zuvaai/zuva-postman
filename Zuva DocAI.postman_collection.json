@@ -382,7 +382,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"file_ids\": [\n        \"c5e41av1qk1er7odm79g\"\n    ]\n}",
+									"raw": "{\n    \"file_ids\": [\n        \"c5e41av1qk1er7odm79g\"\n    ],\n    \"layout\": true\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -720,19 +720,19 @@
 					]
 				},
 				{
-					"name": "Get Field Layout",
+					"name": "Get Field Layouts",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/ocr/{{ocr_request_id}}/layout",
+							"raw": "{{zdai-base-url}}/ocr/{{ocr_request_id}}/layouts",
 							"host": [
 								"{{zdai-base-url}}"
 							],
 							"path": [
 								"ocr",
 								"{{ocr_request_id}}",
-								"layout"
+								"layouts"
 							]
 						}
 					},
