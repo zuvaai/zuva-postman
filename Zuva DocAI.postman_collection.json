@@ -720,7 +720,7 @@
 					]
 				},
 				{
-					"name": "Get Field Layouts",
+					"name": "Get File Layouts",
 					"request": {
 						"method": "GET",
 						"header": [],
