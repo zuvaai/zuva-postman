@@ -1,3 +1,7 @@
+# Postman API Network
+
+This collection is now available in [our workspace](https://www.postman.com/zuva-ai/workspace/zuva-api-v2/overview) on the Postman API Network.
+
 # Zuva DocAI's Postman Collections
 
 This repository contains a v2.1 Postman Collection for all of Zuva DocAI's endpoints.
