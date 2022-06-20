@@ -20,6 +20,13 @@ This environment should contain the following keys:
 * zdai-base-url : This is where your ZDAI Base URL goes (e.g. https://<url_to_instance>/api/v2)
 * token : Token goes here (without "Bearer" prepended)
 
+# Run Collection
+
+To run most requests in a sensible order, you can use the the [Run Collection](https://learning.postman.com/docs/running-collections/intro-to-collection-runs/). The tests for each endpoint have been configured to
+correctly poll and/or trigger the appropriate next request, stepping through file upload, OCR, field extraction, document
+classification and language classification. Training-related requests are currently excluded from the run.
+
+
 # Documents
 
 This repository contains a publicly-available document found at the following:

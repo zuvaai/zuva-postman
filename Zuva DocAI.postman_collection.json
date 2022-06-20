@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "12615108-3f98-4237-b8bd-2b1840519119",
+		"_postman_id": "bdf83a1e-1d33-4866-b76f-7ee557bf70c6",
 		"name": "Zuva DocAI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8497264"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -25,6 +24,9 @@
 									"pm.test(\"The response contains a file_id.\", function () {",
 									"    pm.expect(jsonData).to.have.property('file_id');",
 									"    pm.environment.set(\"file_id\", jsonData[\"file_id\"]);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    postman.setNextRequest(\"Create OCR Request\")",
 									"});",
 									""
 								],
@@ -249,7 +251,8 @@
 								"exec": [
 									"pm.test(\"The file was deleted successfully.\", function () {",
 									"    pm.response.to.have.status(204);",
-									"});"
+									"});",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -339,6 +342,12 @@
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
 									"    pm.environment.set(\"ocr_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    pm.environment.set(\"test_exp_backoff\", 100);",
+									"    pm.environment.set(\"test_max_attempts\", 20);",
+									"    pm.environment.set(\"test_attempts\", 0);",
+									"    postman.setNextRequest(\"Get OCR Request Status\");",
 									"});",
 									""
 								],
@@ -454,8 +463,30 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"The OCR request status was successful.\", function () {",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"The OCR request status was successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    if (jsonData[\"status\"] == \"complete\") {",
+									"        postman.setNextRequest(\"Get OCR Request Text\");",
+									"        setTimeout(function(){}, 0);",
+									"    } else if (jsonData[\"status\"] == \"queued\" || jsonData[\"status\"] == \"processing\") {",
+									"        if (pm.environment.get(\"test_attempts\") < pm.environment.get(\"test_max_attempts\")) {",
+									"            pm.environment.set(\"test_attempts\", pm.environment.get(\"test_attempts\") + 1)",
+									"            pm.environment.set(\"test_exp_backoff\", Math.min(16000, 2 * pm.environment.get(\"test_exp_backoff\")));",
+									"            console.log(\"setting timeout to \" + pm.environment.get(\"test_exp_backoff\") + \" ms\");",
+									"            setTimeout(function(){}, pm.environment.get(\"test_exp_backoff\"));",
+									"            postman.setNextRequest(\"Get OCR Request Status\");",
+									"        } else {",
+									"            console.log(\"timed out\");",
+									"            postman.setNextRequest(null);",
+									"        }",
+									"    } else {",
+									"        console.log(\"failed\");",
+									"        postman.setNextRequest(null);",
+									"    }",
 									"});"
 								],
 								"type": "text/javascript"
@@ -610,7 +641,10 @@
 									"pm.test(\"The OCR request text is valid.\", function() {",
 									"    pm.expect(jsonData).to.have.property('text');",
 									"    pm.expect(jsonData[\"text\"].length).to.have.greaterThan(1)",
-									"});"
+									"});",
+									"",
+									"// Chaining for when we run the whole collection",
+									"postman.setNextRequest(\"Get OCR Request Images\");"
 								],
 								"type": "text/javascript"
 							}
@@ -672,7 +706,9 @@
 									"pm.test(\"The OCR request image is valid.\", function() {",
 									"    pm.response.to.have.header(\"content-type\");",
 									"    pm.expect(pm.response.to.be.header(\"content-type\", \"application/zip\"));",
-									"});"
+									"});",
+									"",
+									"postman.setNextRequest(\"Get File Layouts\");"
 								],
 								"type": "text/javascript"
 							}
@@ -722,6 +758,24 @@
 				},
 				{
 					"name": "Get File Layouts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The layouts were successfully returned.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Request chaining for tests",
+									"postman.setNextRequest(\"Get All Fields\");",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -758,7 +812,9 @@
 									"pm.test(\"The service responded with at least one field in its response.\", () => {",
 									"    const responseJson = pm.response.json();",
 									"    pm.expect(responseJson.length).to.have.greaterThan(1)",
-									"})"
+									"})",
+									"",
+									"postman.setNextRequest(\"Create a Field Extraction Request\");"
 								],
 								"type": "text/javascript"
 							}
@@ -1143,7 +1199,7 @@
 								"exec": [
 									"var jsonData = pm.response.json();",
 									"",
-									"pm.test(\"The field training status request was successful.\", function () {",
+									"pm.test(\"The field training status request was successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -1862,6 +1918,12 @@
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
 									"    pm.environment.set(\"field_extraction_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    pm.environment.set(\"test_exp_backoff\", 100);",
+									"    pm.environment.set(\"test_max_attempts\", 20);",
+									"    pm.environment.set(\"test_attempts\", 0);",
+									"    postman.setNextRequest(\"Get Extraction Request Status\");",
 									"});",
 									""
 								],
@@ -1995,8 +2057,27 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"The extraction request status was successful.\", function () {",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"The extraction request status was successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    if (jsonData[\"status\"] == \"complete\"|| jsonData[\"status\"] == \"failed\") {",
+									"        postman.setNextRequest(\"Get Extraction Request Text Results\");",
+									"        setTimeout(function(){}, 0);",
+									"    } else if (jsonData[\"status\"] == \"queued\" || jsonData[\"status\"] == \"processing\") {",
+									"        if (pm.environment.get(\"test_attempts\") < pm.environment.get(\"test_max_attempts\")) {",
+									"            pm.environment.set(\"test_attempts\", pm.environment.get(\"test_attempts\") + 1)",
+									"            pm.environment.set(\"test_exp_backoff\", Math.min(16000, 2 * pm.environment.get(\"test_exp_backoff\")));",
+									"            console.log(\"setting timeout to \" + pm.environment.get(\"test_exp_backoff\") + \" ms\");",
+									"            setTimeout(function(){}, pm.environment.get(\"test_exp_backoff\"));",
+									"            postman.setNextRequest(\"Get Extraction Request Status\");",
+									"        } else {",
+									"            console.log(\"timed out\");",
+									"            postman.setNextRequest(\"Get Extraction Request Text Results\");",
+									"        }",
+									"    }",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2128,7 +2209,11 @@
 									"pm.test(\"The extraction request results are valid.\", function() {",
 									"    pm.expect(jsonData).to.have.property(\"results\");",
 									"    pm.expect(jsonData[\"results\"].length).to.have.greaterThan(0)",
-									"});"
+									"});",
+									"",
+									"// Chaining for when we run the whole collection",
+									"postman.setNextRequest(\"Create a Document Classification Request\");",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -2224,6 +2309,12 @@
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
 									"    pm.environment.set(\"document_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    pm.environment.set(\"test_exp_backoff\", 100);",
+									"    pm.environment.set(\"test_max_attempts\", 20);",
+									"    pm.environment.set(\"test_attempts\", 0);",
+									"    postman.setNextRequest(\"Get Document Classification Request Status\");",
 									"});",
 									""
 								],
@@ -2303,7 +2394,7 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The document classification request status was successful.\", function () {",
+									"pm.test(\"The document classification request status was  successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -2311,6 +2402,23 @@
 									"    if (jsonData[\"status\"] == \"complete\") {",
 									"        pm.expect(jsonData).to.have.property('classification');",
 									"        pm.expect(jsonData).to.have.property('is_contract');",
+									"    }",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    if (jsonData[\"status\"] == \"complete\"|| jsonData[\"status\"] == \"failed\") {",
+									"        postman.setNextRequest(\"Create a Language Classification Request\");",
+									"        setTimeout(function(){}, 0);",
+									"    } else if (jsonData[\"status\"] == \"queued\" || jsonData[\"status\"] == \"processing\") {",
+									"        if (pm.environment.get(\"test_attempts\") < pm.environment.get(\"test_max_attempts\")) {",
+									"            pm.environment.set(\"test_attempts\", pm.environment.get(\"test_attempts\") + 1)",
+									"            pm.environment.set(\"test_exp_backoff\", Math.min(16000, 2 * pm.environment.get(\"test_exp_backoff\")));",
+									"            console.log(\"setting timeout to \" + pm.environment.get(\"test_exp_backoff\") + \" ms\");",
+									"            setTimeout(function(){}, pm.environment.get(\"test_exp_backoff\"));",
+									"            postman.setNextRequest(\"Get Document Classification Request Status\");",
+									"        } else {",
+									"            console.log(\"timed out\");",
+									"            postman.setNextRequest(\"Create a Language Classification Request\");",
+									"        }",
 									"    }",
 									"})",
 									""
@@ -2449,6 +2557,12 @@
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
 									"    pm.environment.set(\"language_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    pm.environment.set(\"test_exp_backoff\", 100);",
+									"    pm.environment.set(\"test_max_attempts\", 20);",
+									"    pm.environment.set(\"test_attempts\", 0);",
+									"    postman.setNextRequest(\"Get Language Classification Request Status\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2527,13 +2641,30 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The language classification request status was successful.\", function () {",
+									"pm.test(\"The language classification request status was  successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"The language claissification request status returns classification successfully\", function() {",
+									"pm.test(\"The language classification request status returns classification successfully\", function() {",
 									"    if (jsonData[\"status\"] == \"complete\") {",
 									"        pm.expect(jsonData).to.have.property('language');",
+									"    }",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    if (jsonData[\"status\"] == \"complete\"|| jsonData[\"status\"] == \"failed\") {",
+									"        postman.setNextRequest(null);",
+									"        setTimeout(function(){}, 0);",
+									"    } else if (jsonData[\"status\"] == \"queued\" || jsonData[\"status\"] == \"processing\") {",
+									"        if (pm.environment.get(\"test_attempts\") < pm.environment.get(\"test_max_attempts\")) {",
+									"            pm.environment.set(\"test_attempts\", pm.environment.get(\"test_attempts\") + 1)",
+									"            pm.environment.set(\"test_exp_backoff\", Math.min(16000, 2 * pm.environment.get(\"test_exp_backoff\")));",
+									"            console.log(\"setting timeout to \" + pm.environment.get(\"test_exp_backoff\") + \" ms\");",
+									"            setTimeout(function(){}, pm.environment.get(\"test_exp_backoff\"));",
+									"            postman.setNextRequest(\"Get Language Classification Request Status\");",
+									"        } else {",
+									"            console.log(\"timed out\");",
+									"            postman.setNextRequest(null);",
+									"        }",
 									"    }",
 									"})"
 								],
