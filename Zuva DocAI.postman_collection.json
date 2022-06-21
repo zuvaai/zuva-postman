@@ -2394,7 +2394,7 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The document classification request status was  successfully retrieved.\", function () {",
+									"pm.test(\"The document classification request status was successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
@@ -2641,7 +2641,7 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The language classification request status was  successfully retrieved.\", function () {",
+									"pm.test(\"The language classification request status was successfully retrieved.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
