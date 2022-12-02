@@ -2717,7 +2717,6 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-<<<<<<< HEAD
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
 									"    pm.environment.set(\"language_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
@@ -2728,15 +2727,6 @@
 									"    pm.environment.set(\"test_attempts\", 0);",
 									"    postman.setNextRequest(\"Get Language Classification Request Status\");",
 									"});"
-=======
-									"pm.test(\"The document claissification request status returns classification successfully\", function() {",
-									"    if (jsonData[\"status\"] == \"complete\") {",
-									"        pm.expect(jsonData).to.have.property('classification');",
-									"        pm.expect(jsonData).to.have.property('is_contract');",
-									"    }",
-									"})",
-									""
->>>>>>> feat(AITK-2271): Update postman with MLC, Normalize & Multiple Statuses
 								],
 								"type": "text/javascript"
 							}
