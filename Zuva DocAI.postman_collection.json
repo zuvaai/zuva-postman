@@ -918,58 +918,6 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\"\n        }\n    },\n    \"errors\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"error\": {\n                \"code\": \"invalid_request_id\",\n                \"message\": \"The request ID provided was not found.\"\n            }\n        }\n    }\n}"
-						},
-						{
-							"name": "Failed to retrieve all Request IDs",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/ocrs?request_id=cdrptcq8rut0hgjdgre0&request_id=cdrptd28rut0hgjdgrf0&request_id=cdrptda8rut0hgjdgrg0&request_id=cdrptdi8rut0hgjdgrh0&request_id=cdrptdi8rut0hgjdgrh2",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"ocrs"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "cdrptcq8rut0hgjdgre0"
-										},
-										{
-											"key": "request_id",
-											"value": "cdrptd28rut0hgjdgrf0"
-										},
-										{
-											"key": "request_id",
-											"value": "cdrptda8rut0hgjdgrg0"
-										},
-										{
-											"key": "request_id",
-											"value": "cdrptdi8rut0hgjdgrh0"
-										},
-										{
-											"key": "request_id",
-											"value": "cdrptdi8rut0hgjdgrh2"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json",
-									"name": "Content-Type",
-									"description": "",
-									"type": "text"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"error\": {\n        \"code\": \"unknown_error\",\n        \"message\": \"An unknown error occurred while processing the request.\"\n    }\n}"
 						}
 					]
 				},
@@ -3210,7 +3158,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/classifications?request_id=request_id",
+							"raw": "{{zdai-base-url}}/classifications?request_id={{classification_request_ids}}&request_id={{classification_request_ids}}&request_id={{classification_request_ids}}&request_id={{classification_request_ids}}",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -3220,7 +3168,19 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "request_id"
+									"value": "{{classification_request_ids}}"
+								},
+								{
+									"key": "request_id",
+									"value": "{{classification_request_ids}}"
+								},
+								{
+									"key": "request_id",
+									"value": "{{classification_request_ids}}"
+								},
+								{
+									"key": "request_id",
+									"value": "{{classification_request_ids}}"
 								}
 							]
 						}
@@ -3232,13 +3192,30 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"classifications"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68g0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68gg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68h0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68hg"
+										}
 									]
 								}
 							},
@@ -3247,7 +3224,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classification\": \"Real Estate Agt\",\n    \"is_contract\": true\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        }\n    }\n}"
 						},
 						{
 							"name": "Document Classification Request Failed",
@@ -3255,13 +3232,30 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"classifications"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68g0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68gg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68h0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68hg"
+										}
 									]
 								}
 							},
@@ -3270,7 +3264,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
 						},
 						{
 							"name": "Document Classification Request Processing",
@@ -3278,13 +3272,30 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"classifications"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68g0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68gg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68h0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68hg"
+										}
 									]
 								}
 							},
@@ -3293,7 +3304,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
 						},
 						{
 							"name": "Document Classification Request Queued",
@@ -3301,13 +3312,30 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"classifications"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68g0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68gg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68h0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68hg"
+										}
 									]
 								}
 							},
@@ -3316,7 +3344,87 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Retrieval failed due to invalid request_id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"classifications"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68g0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68gg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68h0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68hg"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
+						},
+						{
+							"name": "Retrieval failed due to request_id not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"classifications"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68g0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68gg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68h0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7m85s2nt5r5uan68hg"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
 					]
 				}
@@ -3586,7 +3694,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/languages?request_id=cdrpvcmllb3b7mo4tb9g&request_id=cdrpvcmllb3b7mo4tba0&request_id=cdrpvcmllb3b7mo4tbag&request_id=cdrpvcmllb3b7mo4tbb0&request_id=invalid",
+							"raw": "{{zdai-base-url}}/languages?request_id={{language_request_ids}}&request_id={{language_request_ids}}&request_id={{language_request_ids}}&request_id={{language_request_ids}}",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -3596,23 +3704,19 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "cdrpvcmllb3b7mo4tb9g"
+									"value": "{{language_request_ids}}"
 								},
 								{
 									"key": "request_id",
-									"value": "cdrpvcmllb3b7mo4tba0"
+									"value": "{{language_request_ids}}"
 								},
 								{
 									"key": "request_id",
-									"value": "cdrpvcmllb3b7mo4tbag"
+									"value": "{{language_request_ids}}"
 								},
 								{
 									"key": "request_id",
-									"value": "cdrpvcmllb3b7mo4tbb0"
-								},
-								{
-									"key": "request_id",
-									"value": "invalid"
+									"value": "{{language_request_ids}}"
 								}
 							]
 						}
@@ -3624,13 +3728,30 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"language",
-										"{{language_classification_request_id}}"
+										"languages"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltc0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltcg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltb0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltbg"
+										}
 									]
 								}
 							},
@@ -3639,7 +3760,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\",\n    \"language\": \"English\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\",\n            \"language\": \"English\"\n        }\n    }\n}"
 						},
 						{
 							"name": "Language Classification Request Failed",
@@ -3647,13 +3768,30 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"language",
-										"{{language_classification_request_id}}"
+										"languages"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltc0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltcg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltb0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltbg"
+										}
 									]
 								}
 							},
@@ -3662,7 +3800,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
 						},
 						{
 							"name": "Language Classification Request Processing",
@@ -3670,13 +3808,30 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"language",
-										"{{language_classification_request_id}}"
+										"languages"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltc0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltcg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltb0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltbg"
+										}
 									]
 								}
 							},
@@ -3685,7 +3840,7 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
 						},
 						{
 							"name": "Language Classification Request Queued",
@@ -3693,13 +3848,30 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"language",
-										"{{language_classification_request_id}}"
+										"languages"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltc0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltcg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltb0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltbg"
+										}
 									]
 								}
 							},
@@ -3708,7 +3880,87 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Retrieval failed due to invalid request_id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"languages"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltc0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltcg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltb0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltbg"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        }\n    },\n    \"errors\": {\n        \"ce7md32pkarab6ciltcg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
+						},
+						{
+							"name": "Retrieval failed due to request_id not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"languages"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltc0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltcg"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltb0"
+										},
+										{
+											"key": "request_id",
+											"value": "ce7md32pkarab6ciltbg"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        }\n    },\n    \"errors\": {\n        \"ce7md32pkarab6ciltcg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
 					]
 				}
