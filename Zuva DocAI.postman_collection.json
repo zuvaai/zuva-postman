@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "882cceb9-42f5-4859-a8cd-6008cbe9b81b",
+		"_postman_id": "58dd702f-785b-4307-84c9-4784118640ae",
 		"name": "Zuva DocAI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "8497264"
+		"_exporter_id": "20632446"
 	},
 	"item": [
 		{
@@ -56,7 +56,7 @@
 					},
 					"response": [
 						{
-							"name": "Successfully submitted",
+							"name": "Succesfully submitted",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -79,9 +79,30 @@
 							"status": "Created",
 							"code": 201,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": [
+								{
+									"key": "content-length",
+									"value": "228"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 27 Oct 2022 09:53:40 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "86"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e407f1qk1er7odm6tg\",\n    \"attributes\": {\n        \"content-type\": \"application/pdf\"\n    },\n    \"permissions\": [\n        \"\"\n    ],\n    \"expiration\": \"2021-10-07T12:07:57Z\"\n}"
+							"body": "{\n    \"file_id\": \"cdd5a959j3v1l070hptg\",\n    \"attributes\": {\n        \"content-type\": \"application/pdf\",\n        \"sha-256\": \"8b9bff906445adb9925abca7c48954155b3bfc9b548163086f001fa6b25760aa\"\n    },\n    \"permissions\": [\n        \"\"\n    ],\n    \"expiration\": \"2022-10-29T09:53:40Z\",\n    \"size\": 283635\n}"
 						}
 					]
 				},
@@ -152,14 +173,35 @@
 							"status": "Created",
 							"code": 201,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": [
+								{
+									"key": "content-length",
+									"value": "223"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 27 Oct 2022 09:54:49 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "91"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e40jn1qk1er7odm71g\",\n    \"attributes\": {\n        \"content-type\": \"text/plain\"\n    },\n    \"permissions\": [\n        \"\"\n    ],\n    \"expiration\": \"2021-10-07T12:08:46Z\"\n}"
+							"body": "{\n    \"file_id\": \"cdd5aqd9j3v1l070hq2g\",\n    \"attributes\": {\n        \"content-type\": \"text/plain\",\n        \"sha-256\": \"b192747e733a94f0d6cdcf2aa63aab64b7b015209b2212c28af5d60e9bfee977\"\n    },\n    \"permissions\": [\n        \"\"\n    ],\n    \"expiration\": \"2022-10-29T09:54:49Z\",\n    \"size\": 129106\n}"
 						}
 					]
 				},
 				{
-					"name": "Submit a ZuvaOCR File",
+					"name": "Submit an eOCR File",
 					"event": [
 						{
 							"listen": "test",
@@ -186,7 +228,7 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/kiraocr",
+								"value": "application/eocr",
 								"type": "text"
 							}
 						],
@@ -214,7 +256,7 @@
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/kiraocr",
+										"value": "application/eocr",
 										"type": "text"
 									}
 								],
@@ -237,9 +279,30 @@
 							"status": "Created",
 							"code": 201,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": [
+								{
+									"key": "content-length",
+									"value": "229"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 27 Oct 2022 09:55:24 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "130"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e40of1qk1er7odm740\",\n    \"attributes\": {\n        \"content-type\": \"application/kiraocr\"\n    },\n    \"permissions\": [\n        \"\"\n    ],\n    \"expiration\": \"2021-10-07T12:09:05Z\"\n}"
+							"body": "{\n    \"file_id\": \"cdd5b359j3v1l070hq5g\",\n    \"attributes\": {\n        \"content-type\": \"application/eocr\",\n        \"sha-256\": \"a561d525e4206831edc24f15feebe420f444e393b9778bb1dd9786edb563d869\"\n    },\n    \"permissions\": [\n        \"\"\n    ],\n    \"expiration\": \"2022-10-29T09:55:23Z\",\n    \"size\": 832516\n}"
 						}
 					]
 				},
@@ -1008,7 +1071,7 @@
 									"    pm.expect(pm.response.to.be.header(\"content-type\", \"application/zip\"));",
 									"});",
 									"",
-									"postman.setNextRequest(\"Get File Layouts\");"
+									"postman.setNextRequest(\"Get eOCR document\");"
 								],
 								"type": "text/javascript"
 							}
@@ -1053,6 +1116,91 @@
 							"header": [],
 							"cookie": [],
 							"body": "PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0005\u0000\u0000\u00000.png�\f�s���b``���p\tb``����&�����\u0010T�l����\u0019�\u0013����vv���n�{�X\u0019\u0018�L=]\u001cC*n��}�h��\u0000k����/N�x%��/K/�\\�kՈ�\t�i�&I�\u0019�\bh��q���=�j~��ﬕ8��ՄGv\u001c>���(a�J���iӋ���6��ܰ�V����������X3��tݴ[�̯�]\u0014>�-~\u001fo�Y�¥�c>{ؔ��_�ߘQ�}�t���1z��\u001bKw�O/̫9:=u�ޝ5\u000b\u000f�1qߓ�X{�C��sqWw�f\u0019���fק��6����%r�dJ�\\�K��\u0013\n�d��w��/��^}&O�~�\f����5\u001f�\u0015y2��?$^���S�:�o�������ovo�\u0012��.ߒOf��\u001dO���q�.���\u0017\u0013?�Z�v��5�W��+�`�z��S��jf�_��\u000en�����m/�־7����W��/NMX+����Y\u001a��9\u0017ˤJ\u0016���:��醢�\u001b�jj\u0016\u0016xsl_��U�C��v��\n�.Y��-\t��\u0014(���Q�gn�m�SW/o����5�p���ٿ+\u0016�%��3���\u001e/\u0016Qp�@�q����ߝ\u0017��������Yv���}�W�]��\u0013��c���G3����Y�?��ڛ���s���\u00157��\n��䜲���\u0003]��׾q7n]:ϼ����\u0003R�\u001f�\u0017J6���k�P�c�\u0005�\u001bKo|�n���w4S���*\u001b\u001e\u001ck\u0014=~(�̱���Y+S��\u000e�2,�=l�v�zv��u�\u0011�_�[�\u001d�ĝ'\u0017���͉�\u001f�hX��Zsν�kƼ�W�w>�L�>~=?H�y�]�M�׌c7��7n�I88w��c2�d|/J_���X�?4�UdmW��\u0016�(/��/��r�\u000e<�NF��qM�泚��IY�k\"���y[g]�<����%��n\u0007�M�~y�Ҩ�Y;J+,f���`�!�L��sϏĳ��|iw�U���Gozw_ڱ���N���G��?������O}\u000f���\u001c���jJ�2�?��b�\\���\u0015|>p+_!�����ګB\u0012\u0007b�_���'�cF�(\u0018\u0005�`\u0014�\u0002���؞A\u0002���\n\u0013\u000e����~.�\u0012�\u0000\u0001\u0000\u0000��PK\u0007\b�\u0013�j�\u0003\u0000\u0000�\n\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0005\u0000\u0000\u00001.png�\f�s���b``���p\tb``����&�����\u0010T�l����\u0019�\u0013����\u000e\u000e���n����\u0019\u0018�|=]\u001cC*n����l��\u0000[@��\u000bgKMp\u00137_\u0019^����_��PW�\u000f1�\"M�!\u0002\u000e�\u001ey�l,s{������>^���\u0018��_�!F�Jbʟ��3��>﻾��>��+>��?����L���D��{9�A5S���\f�}��>���ݰ�<\u0013���\u0007�V>ؼ��\u001a���_*3,�VM3�m\u001c��[�V��WU�a=���]w�4��Ze�\u0003����Z\u0017����*i;sS�ҽ+k�-�\\�\\���Re�˒��k^�\t�l��H���'�,o�Q�:����O�tTv\u001d���:]���I�'*=�\u0013�8�J��\u001d]��}�\u000b��g�{M>���!\u001d��23\n���}����-��\u001a�S~=���8���G�\u0017�\u0007.�l����ہ���<k$�\u001b�R��]_>|��Z߼��Dk�?��ӧa!��חk�L�i�D�=׌N��~Ġ��I�\nI2���'�=�`~}é��i��R��������%���B��\t���&�X�h(r���\u0013��g~:�6�Lc�1��7�Yh3q���(�}�ꁋNc�m���?�Ƿ��pq�_�\u001b�־sR?��Q�\u0018z|V��Χ\u0013/\u001b�>�e��\"���;ߚM�3#�>^d֎}\u0014Ϲf\u0006���;�{�\"&2i����Ϝ\u001d\u0015\u0013�v�p#��y�f�W�\u0018Lz�V|����������VG�Y��\u0012\u000e�e�~v�r�]F���Oq�����M���t?�W�WO��n�N�7^\n�K8��Y��iԩ\u0012Q��\u0013��{U��y��;w��\u001fq�M_�����x}�[>���ؗg\u001f�mh�\u0010�(xn�f[�Q�O�u�+��W\u0002��V��\u001dp����f�\u0017^zu9��u�6{XΩ��U�L����fq����������r���K���r��-�޷]���\u0003ϵ�\u001e�����.���>��\u000f�\">{}/1V��-q�߳w�\u0014��|tKqmUT[eѩ��l^��ғ�_��Ֆ�ey���K�E箨���c�8��\u000b�r�5AכD\u000e�2g���'��F�(\u0018\u0005�`\u0014�\u0002���؞!F���W��&\u0010����e�SB\u0013 \u0000\u0000��PK\u0007\bM/\u0019��\u0003\u0000\u0000�\n\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0005\u0000\u0000\u00002.png�\f�s���b``���p\tb``����&�����\u0010T�l����\u0019�\u0013����\u000e\u000e���.��3�\u0019\u0018�b=]\u001cC*n���:h��\u0000[����/��R�{���j���s�<*������1\f\u0011�@i��o�q���{j�a껧��\nr�﮲o<����\u0001-�=�\\�aV��(�3���=V�_t>�g�7��v��V\u001bNy3��ӝ*ϳF��{��ֺG{�=\u0013���\tG|�f�n3��I���Y^���\u0005/B��v]���e�&����﫝m��g��.(\tVod�\u0017��}�Fݻ���e���a�n%���o���9σ���l=t'����{39�Ky�\\�cݵVl?u��4��`�Ǉ��_��z�ۻu���]h�L������xi��n\u0005'��>>���:\u0016\u0007O�%�^�]g��*Pݥ�����♛<��\u001d��p��y��/ܞs��_j��^���r�ļ�o��om{y�͛��n{��Fȭ�\u0016U}R����Mdt���-�;4\u001e�=�=�xI�sB��\t�v���;����o�V����w5���n��\u0013:Wb]�\"��!%^�\u000bv\u001al�\u000f�w��ڴ��ؒ�=�r�\\��\u0017v��\t�0\\R!g䯺�T�����o_�5f�|i��tauh����r\u001ck�eV�L�XS���f��/�}Ļ-7\\��\\.�ĭ'\u0016q{�\u0004I��\u0017�V{Ϯ\u0017���z�VPB끦��\u0011��7�ٕ_���zE`~��U�\f�2\u0011��w�\u000en4���*a��\u0019,b1�\u001b�tlަ�2�,f�f����Rל\u001b��;��<O�d��D����m[��k�~\u0011�P�̥�#,a��e��\\�u�������������F��Nvwz}9���[4�\u0017�J�\u0011���c�^W�:5~RVxDzr׼���ʧ\u0007�f����k�X�ֳ��֪iߖ��\\�Z�[ʲ��§Z\u001b>\u0005�4~=�^�������e՚o�ܿ��4x�����ҥ�6U\u0004�T�>|�V���~�\n�y����n(�W��{�\u001a�M�R��\u0005�����k��Ñ����N��|��\u0007�\u0004�����Yw�E'\u001c��ƪ\u001e�+��Q��}�\u0018w\u0014%��*�d\u0010�]��\u001c��5\nF�(\u0018\u0005�`\u0014\u0010\u0004\u000f��1�����\u001d38\f�{����sJh\u0002\u0004\u0000\u0000��PK\u0007\b��I\u0004�\u0003\u0000\u0000�\n\u0000\u0000PK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000�\u0013�j�\u0003\u0000\u0000�\n\u0000\u0000\u0005\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u00000.pngPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000M/\u0019��\u0003\u0000\u0000�\n\u0000\u0000\u0005\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u000b\u0004\u0000\u00001.pngPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000��I\u0004�\u0003\u0000\u0000�\n\u0000\u0000\u0005\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000,\b\u0000\u00002.pngPK\u0005\u0006\u0000\u0000\u0000\u0000\u0003\u0000\u0003\u0000�\u0000\u0000\u0000Z\f\u0000\u0000\u0000\u0000"
+						}
+					]
+				},
+				{
+					"name": "Get eOCR document",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"The eOCR document was successfully returned.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"The eOCR document is valid.\", function() {",
+									"    pm.response.to.have.header(\"content-type\");",
+									"    pm.expect(pm.response.to.be.header(\"content-type\", \"application/octet-stream\"));",
+									"});",
+									"",
+									"postman.setNextRequest(\"Get File Layouts\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{zdai-base-url}}/ocr/{{ocr_request_id}}/eocr",
+							"host": [
+								"{{zdai-base-url}}"
+							],
+							"path": [
+								"ocr",
+								"{{ocr_request_id}}",
+								"eocr"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eOCR document retrieved",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/ocr/{{ocr_request_id}}/eocr",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"ocr",
+										"{{ocr_request_id}}",
+										"eocr"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "raw",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/octet-stream"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 16 Nov 2022 20:54:57 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "115"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								},
+								{
+									"key": "transfer-encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "eocr     \r\n<binary file content truncated>"
 						}
 					]
 				},
