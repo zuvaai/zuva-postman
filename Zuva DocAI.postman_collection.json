@@ -4501,12 +4501,9 @@
 									"var jsonData = pm.response.json();",
 									"",
 									"pm.test(\"The custom field training request was created successfully.\", function () {",
-									"    pm.response.to.have.status(202);",
-									"});",
-									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
-									"    pm.expect(jsonData).to.have.property(\"request_id\");",
-									"    pm.environment.set(\"field_training_request_id\", jsonData[\"request_id\"]);",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData).to.have.property(\"sha-256\");",
+									"    pm.expect(jsonData).to.have.property(\"currency\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4536,7 +4533,46 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Normalize Currency Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\":\"The rent is two thousand three hundred forty seven dollars\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/normalize/currency",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"normalize",
+										"currency"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"request_id\": \"ce822vlnq2nqp5kisms0\",\n    \"text\": \"The rent is two thousand three hundred forty seven dollars\",\n    \"sha-256\": \"9e5073c23ea12c7eb74682089380f9a5b891e3fe2cbe04a3ec89d9d5c004de17\",\n    \"currency\": [\n        {\n            \"value\": \"2347.00\",\n            \"symbol\": \"dollars\",\n            \"precision\": 2\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Normalize Date",
@@ -4548,12 +4584,9 @@
 									"var jsonData = pm.response.json();",
 									"",
 									"pm.test(\"The custom field training request was created successfully.\", function () {",
-									"    pm.response.to.have.status(202);",
-									"});",
-									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
-									"    pm.expect(jsonData).to.have.property(\"request_id\");",
-									"    pm.environment.set(\"field_training_request_id\", jsonData[\"request_id\"]);",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData).to.have.property(\"sha-256\");",
+									"    pm.expect(jsonData).to.have.property(\"date\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4583,7 +4616,46 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Normalize Date Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\":\"The lease terminates on Monday, November 28, 2022\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/normalize/date",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"normalize",
+										"date"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"request_id\": \"ce8233lnq2nqp5kismt0\",\n    \"text\": \"The lease terminates on Monday, November 28, 2022\",\n    \"sha-256\": \"914bbbcb1432e0419aa46042cc09fc908c0b3ce822977ebe62d2530c4dd2386c\",\n    \"date\": [\n        {\n            \"day\": 28,\n            \"month\": 11,\n            \"year\": 2022\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Normalize Duration",
@@ -4595,12 +4667,9 @@
 									"var jsonData = pm.response.json();",
 									"",
 									"pm.test(\"The custom field training request was created successfully.\", function () {",
-									"    pm.response.to.have.status(202);",
-									"});",
-									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
-									"    pm.expect(jsonData).to.have.property(\"request_id\");",
-									"    pm.environment.set(\"field_training_request_id\", jsonData[\"request_id\"]);",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData).to.have.property(\"sha-256\");",
+									"    pm.expect(jsonData).to.have.property(\"duration\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -4630,7 +4699,46 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Normalize Duration Successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"text\": \"The contract expires 4 months after termination\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/normalize/duration",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"normalize",
+										"duration"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"request_id\": \"ce8236lnq2nqp5kismu0\",\n    \"text\": \"The contract expires 4 months after termination\",\n    \"sha-256\": \"97d7dfd38b649cd6109d0be3f757d65f485d483cce6235294938ca02cd99ed18\",\n    \"duration\": [\n        {\n            \"unit\": \"months\",\n            \"value\": 4\n        }\n    ]\n}"
+						}
+					]
 				}
 			]
 		}
