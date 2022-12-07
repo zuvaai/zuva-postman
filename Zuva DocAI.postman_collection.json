@@ -633,8 +633,12 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"The OCR request status was successful.\", function () {",
+									"jsonData = pm.response.json()",
+									"",
+									"pm.test(\"The document classification request status was successful.\", function () {",
 									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData).to.have.property('num_found');",
+									"    pm.expect(jsonData).to.have.property('num_errors');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2501,7 +2505,13 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"jsonData = pm.response.json()",
+									"",
+									"pm.test(\"The document classification request status was successful.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData).to.have.property('num_found');",
+									"    pm.expect(jsonData).to.have.property('num_errors');",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -3063,7 +3073,7 @@
 						{
 							"name": "Document Classification Request Failed",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
@@ -3086,7 +3096,7 @@
 						{
 							"name": "Document Classification Request Processing",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
@@ -3142,17 +3152,8 @@
 									"",
 									"pm.test(\"The document classification request status was successful.\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
-									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
-									"    pm.environment.set(\"language_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
-									"",
-									"    // Chaining for when we run the whole collection",
-									"    pm.environment.set(\"test_exp_backoff\", 100);",
-									"    pm.environment.set(\"test_max_attempts\", 20);",
-									"    pm.environment.set(\"test_attempts\", 0);",
-									"    postman.setNextRequest(\"Get Language Classification Request Status\");",
+									"    pm.expect(jsonData).to.have.property('num_found');",
+									"    pm.expect(jsonData).to.have.property('num_errors');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3983,13 +3984,13 @@
 								"exec": [
 									"var jsonData = pm.response.json();",
 									"",
-									"pm.test(\"The Document Classification request was created successfully.\", function () {",
+									"pm.test(\"The Multi-level Classification request was created successfully.\", function () {",
 									"    pm.response.to.have.status(202);",
 									"});",
 									"",
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
-									"    pm.environment.set(\"document_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
+									"    pm.environment.set(\"mlc_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
 									"});",
 									""
 								],
@@ -4002,7 +4003,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"file_ids\": [\n        \"cduk2nsasa93oh7beemg\",\n        \"cduk2rcasa93oh7beepg\",\n        \"cduk2tsasa93oh7bees0\"\n    ]\n}",
+							"raw": "{\n    \"file_ids\": [\n        \"{{file_id}}\"\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4019,7 +4020,45 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "MLC Request Created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"file_ids\": [\n        \"c5e41av1qk1er7odm79g\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{zdai-base-url}}/mlc",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"mlc"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"file_ids\": [\n        {\n            \"file_id\": \"c5e41av1qk1er7odm79g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81k5k2nt5lf46eg7kg\"\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Get MLC Request Status",
@@ -4036,8 +4075,7 @@
 									"",
 									"pm.test(\"The document claissification request status returns classification successfully\", function() {",
 									"    if (jsonData[\"status\"] == \"complete\") {",
-									"        pm.expect(jsonData).to.have.property('classification');",
-									"        pm.expect(jsonData).to.have.property('is_contract');",
+									"        pm.expect(jsonData).to.have.property('classifications');",
 									"    }",
 									"})",
 									""
@@ -4050,30 +4088,30 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/mlc/cdujop4asa9ams8tnku0",
+							"raw": "{{zdai-base-url}}/mlc/{{mlc_request_id}}",
 							"host": [
 								"{{zdai-base-url}}"
 							],
 							"path": [
 								"mlc",
-								"cdujop4asa9ams8tnku0"
+								"{{mlc_request_id}}"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Document Classification Request Completed",
+							"name": "MLC Request Completed",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/mlc/{{mlc_request_id}}",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"mlc",
+										"{{mlc_request_id}}"
 									]
 								}
 							},
@@ -4082,21 +4120,21 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classification\": \"Real Estate Agt\",\n    \"is_contract\": true\n}"
+							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classifications\": [\n        \"Contract\",\n        \"IP Agt\",\n        \"License Agt\"\n    ]\n}"
 						},
 						{
-							"name": "Document Classification Request Failed",
+							"name": "MLC Request Failed",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/mlc/{{mlc_request_id}}",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"mlc",
+										"{{mlc_request_id}}"
 									]
 								}
 							},
@@ -4108,18 +4146,18 @@
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
 						},
 						{
-							"name": "Document Classification Request Processing",
+							"name": "MLC Request Processing",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/mlc/{{mlc_request_id}}",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"mlc",
+										"{{mlc_request_id}}"
 									]
 								}
 							},
@@ -4131,18 +4169,18 @@
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
 						},
 						{
-							"name": "Document Classification Request Queued",
+							"name": "MLC Request Queued",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/mlc/{{mlc_request_id}}",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"mlc",
+										"{{mlc_request_id}}"
 									]
 								}
 							},
@@ -4166,15 +4204,9 @@
 									"",
 									"pm.test(\"The document classification request status was successful.\", function () {",
 									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The document claissification request status returns classification successfully\", function() {",
-									"    if (jsonData[\"status\"] == \"complete\") {",
-									"        pm.expect(jsonData).to.have.property('classification');",
-									"        pm.expect(jsonData).to.have.property('is_contract');",
-									"    }",
-									"})",
-									""
+									"    pm.expect(jsonData).to.have.property('num_found');",
+									"    pm.expect(jsonData).to.have.property('num_errors');",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -4184,7 +4216,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/mlcs?request_id=cdujop4asa9ams8tnku0&request_id=cduk34cnmvd78cp0rra0&request_id=cduk34cnmvd78cp0rrag&request_id=cduk34knmvd78cp0rrb0",
+							"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -4194,37 +4226,54 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "cdujop4asa9ams8tnku0"
+									"value": "{{mlc_request_ids}}"
 								},
 								{
 									"key": "request_id",
-									"value": "cduk34cnmvd78cp0rra0"
+									"value": "{{mlc_request_ids}}"
 								},
 								{
 									"key": "request_id",
-									"value": "cduk34cnmvd78cp0rrag"
+									"value": "{{mlc_request_ids}}"
 								},
 								{
 									"key": "request_id",
-									"value": "cduk34knmvd78cp0rrb0"
+									"value": "{{mlc_request_ids}}"
 								}
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "Document Classification Request Completed",
+							"name": "MLC Request Completed",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"mlcs"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										}
 									]
 								}
 							},
@@ -4233,67 +4282,38 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classification\": \"Real Estate Agt\",\n    \"is_contract\": true\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81th42nt5lf46egaig\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        }\n    }\n}"
 						},
 						{
-							"name": "Document Classification Request Failed",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
-						},
-						{
-							"name": "Document Classification Request Processing",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
-						},
-						{
-							"name": "Document Classification Request Queued",
+							"name": "MLC Request Failed",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
+									"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
 									"host": [
 										"{{zdai-base-url}}"
 									],
 									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
+										"mlcs"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										}
 									]
 								}
 							},
@@ -4302,7 +4322,167 @@
 							"_postman_previewlanguage": "json",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\"\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\"\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\"\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81th42nt5lf46egaig\"\n        }\n    }\n}"
+						},
+						{
+							"name": "MLC Request Processing",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"mlcs"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\"\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\"\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\"\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81th42nt5lf46egaig\"\n        }\n    }\n}"
+						},
+						{
+							"name": "MLC Request Queued",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"mlcs"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\"\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\"\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\"\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81th42nt5lf46egaig\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Retrieval failed due to invalid request_id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"mlcs"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
+						},
+						{
+							"name": "Retrieval failed due to request_id not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"mlcs"
+									],
+									"query": [
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										},
+										{
+											"key": "request_id",
+											"value": "{{mlc_request_ids}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
 					]
 				}
