@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "58dd702f-785b-4307-84c9-4784118640ae",
+		"_postman_id": "b36d80a3-7766-4b76-aee5-7746fd58c86a",
 		"name": "Zuva DocAI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "20632446"
@@ -698,7 +698,7 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The document classification request status was successful.\", function () {",
+									"pm.test(\"The OCR request status was successful.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"    pm.expect(jsonData).to.have.property('num_found');",
 									"    pm.expect(jsonData).to.have.property('num_errors');",
@@ -712,7 +712,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/ocrs?request_id={{ocr_request_ids}}&request_id={{ocr_request_ids}}&request_id={{ocr_request_ids}}&request_id={{ocr_request_ids}}",
+							"raw": "{{zdai-base-url}}/ocrs?request_id={{ocr_request_id}}&request_id=another_request_id",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -722,19 +722,11 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "{{ocr_request_ids}}"
+									"value": "{{ocr_request_id}}"
 								},
 								{
 									"key": "request_id",
-									"value": "{{ocr_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{ocr_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{ocr_request_ids}}"
+									"value": "another_request_id"
 								}
 							]
 						}
@@ -777,7 +769,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2pg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2pg\",\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\"\n        }\n    }\n}"
 						},
@@ -818,7 +810,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\"\n        },\n        \"ce7ksk42nt5o2t4eg2pg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2pg\",\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\"\n        }\n    }\n}"
 						},
@@ -859,7 +851,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\"\n        },\n        \"ce7ksk42nt5o2t4eg2pg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2pg\",\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\"\n        }\n    }\n}"
 						},
@@ -900,7 +892,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\"\n        },\n        \"ce7ksk42nt5o2t4eg2pg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2pg\",\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\"\n        }\n    }\n}"
 						},
@@ -941,7 +933,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\"\n        }\n    },\n    \"errors\": {\n        \"ce7ksk42nt5o2t4eg2pg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format.\"\n            }\n        }\n    }\n}"
 						},
@@ -982,7 +974,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"request_id\": \"ce7ksjs2nt5o2t4eg2og\",\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2qg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2qg\",\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\"\n        },\n        \"ce7ksk42nt5o2t4eg2rg\": {\n            \"request_id\": \"ce7ksk42nt5o2t4eg2rg\",\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\"\n        }\n    },\n    \"errors\": {\n        \"ce7ksjs2nt5o2t4eg2og\": {\n            \"error\": {\n                \"code\": \"invalid_request_id\",\n                \"message\": \"The request ID provided was not found.\"\n            }\n        }\n    }\n}"
 						}
@@ -1176,7 +1168,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "raw",
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "content-type",
@@ -2655,7 +2647,7 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The document classification request status was successful.\", function () {",
+									"pm.test(\"The field extraction request status was successful.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"    pm.expect(jsonData).to.have.property('num_found');",
 									"    pm.expect(jsonData).to.have.property('num_errors');",
@@ -2669,7 +2661,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/extractions/?request_id={{field_extraction_request_ids}}&request_id={{field_extraction_request_ids}}&request_id={{field_extraction_request_ids}}&request_id={{field_extraction_request_ids}}",
+							"raw": "{{zdai-base-url}}/extractions/?request_id={{field_extraction_request_id}}&request_id=another_request_id",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -2680,19 +2672,11 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "{{field_extraction_request_ids}}"
+									"value": "{{field_extraction_request_id}}"
 								},
 								{
 									"key": "request_id",
-									"value": "{{field_extraction_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{field_extraction_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{field_extraction_request_ids}}"
+									"value": "another_request_id"
 								}
 							]
 						}
@@ -2735,7 +2719,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7lmv6hf46s6h4k48a0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48a0\"\n        },\n        \"ce7lmv6hf46s6h4k48ag\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48ag\"\n        },\n        \"ce7lmv6hf46s6h4k48b0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48b0\"\n        },\n        \"ce7lmv6hf46s6h4k48bg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48bg\"\n        }\n    }\n}"
 						},
@@ -2776,7 +2760,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7lmv6hf46s6h4k48a0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48a0\"\n        },\n        \"ce7lmv6hf46s6h4k48ag\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48ag\"\n        },\n        \"ce7lmv6hf46s6h4k48b0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48b0\"\n        },\n        \"ce7lmv6hf46s6h4k48bg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48bg\"\n        }\n    }\n}"
 						},
@@ -2817,7 +2801,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7lmv6hf46s6h4k48a0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48a0\"\n        },\n        \"ce7lmv6hf46s6h4k48ag\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48ag\"\n        },\n        \"ce7lmv6hf46s6h4k48b0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48b0\"\n        },\n        \"ce7lmv6hf46s6h4k48bg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48bg\"\n        }\n    }\n}"
 						},
@@ -2858,7 +2842,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7lmv6hf46s6h4k48a0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48a0\"\n        },\n        \"ce7lmv6hf46s6h4k48ag\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48ag\"\n        },\n        \"ce7lmv6hf46s6h4k48b0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48b0\"\n        },\n        \"ce7lmv6hf46s6h4k48bg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48bg\"\n        }\n    }\n}"
 						},
@@ -2899,7 +2883,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7lmv6hf46s6h4k48a0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48a0\"\n        },\n        \"ce7lmv6hf46s6h4k48ag\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48ag\"\n        },\n        \"ce7lmv6hf46s6h4k48b0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48b0\"\n        }\n    },\n    \"errors\": {\n        \"ce7lmv6hf46s6h4k48bg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
 						},
@@ -2940,7 +2924,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7lmv6hf46s6h4k48a0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48a0\"\n        },\n        \"ce7lmv6hf46s6h4k48ag\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48ag\"\n        },\n        \"ce7lmv6hf46s6h4k48b0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7lmv6hf46s6h4k48b0\"\n        }\n    },\n    \"errors\": {\n        \"ce7lmv6hf46s6h4k48bg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
@@ -3312,7 +3296,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/classifications?request_id={{classification_request_ids}}&request_id={{classification_request_ids}}&request_id={{classification_request_ids}}&request_id={{classification_request_ids}}",
+							"raw": "{{zdai-base-url}}/classifications?request_id={{document_classification_request_id}}&request_id=another_request_id",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -3322,19 +3306,11 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "{{classification_request_ids}}"
+									"value": "{{document_classification_request_id}}"
 								},
 								{
 									"key": "request_id",
-									"value": "{{classification_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{classification_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{classification_request_ids}}"
+									"value": "another_request_id"
 								}
 							]
 						}
@@ -3376,7 +3352,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        }\n    }\n}"
 						},
@@ -3416,7 +3392,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
 						},
@@ -3456,7 +3432,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
 						},
@@ -3496,7 +3472,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
 						},
@@ -3536,7 +3512,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
 						},
@@ -3576,7 +3552,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
@@ -3603,6 +3579,12 @@
 									"pm.test(\"The response contains a request_id.\", function () {",
 									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
 									"    pm.environment.set(\"language_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
+									"",
+									"    // Chaining for when we run the whole collection",
+									"    pm.environment.set(\"test_exp_backoff\", 100);",
+									"    pm.environment.set(\"test_max_attempts\", 20);",
+									"    pm.environment.set(\"test_attempts\", 0);",
+									"    postman.setNextRequest(\"Get Language Classification Request Status\");",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3834,7 +3816,7 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"The language claissification request status returns classification successfully\", function() {",
+									"pm.test(\"The language classification request status returns classification successfully\", function() {",
 									"    if (jsonData[\"status\"] == \"complete\") {",
 									"        pm.expect(jsonData).to.have.property('language');",
 									"    }",
@@ -3848,7 +3830,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/languages?request_id={{language_request_ids}}&request_id={{language_request_ids}}&request_id={{language_request_ids}}&request_id={{language_request_ids}}",
+							"raw": "{{zdai-base-url}}/languages?request_id={{language_classification_request_id}}&request_id=another_request_id",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -3858,19 +3840,11 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "{{language_request_ids}}"
+									"value": "{{language_classification_request_id}}"
 								},
 								{
 									"key": "request_id",
-									"value": "{{language_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{language_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{language_request_ids}}"
+									"value": "another_request_id"
 								}
 							]
 						}
@@ -3912,7 +3886,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\",\n            \"language\": \"English\"\n        }\n    }\n}"
 						},
@@ -3952,7 +3926,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
 						},
@@ -3992,7 +3966,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
 						},
@@ -4032,7 +4006,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
 						},
@@ -4072,7 +4046,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        }\n    },\n    \"errors\": {\n        \"ce7md32pkarab6ciltcg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
 						},
@@ -4112,7 +4086,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        }\n    },\n    \"errors\": {\n        \"ce7md32pkarab6ciltcg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
@@ -4198,9 +4172,7 @@
 								{
 									"key": "Content-Type",
 									"value": "application/json",
-									"name": "Content-Type",
-									"description": "",
-									"type": "text"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -4266,7 +4238,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classifications\": [\n        \"Contract\",\n        \"IP Agt\",\n        \"License Agt\"\n    ]\n}"
 						},
@@ -4289,7 +4261,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
 						},
@@ -4312,7 +4284,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
 						},
@@ -4335,7 +4307,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
 						}
@@ -4350,7 +4322,7 @@
 								"exec": [
 									"jsonData = pm.response.json()",
 									"",
-									"pm.test(\"The document classification request status was successful.\", function () {",
+									"pm.test(\"The mlc request status was successful.\", function () {",
 									"    pm.response.to.have.status(200);",
 									"    pm.expect(jsonData).to.have.property('num_found');",
 									"    pm.expect(jsonData).to.have.property('num_errors');",
@@ -4364,7 +4336,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}&request_id={{mlc_request_ids}}",
+							"raw": "{{zdai-base-url}}/mlcs?request_id={{mlc_request_id}}&request_id=another_request_id",
 							"host": [
 								"{{zdai-base-url}}"
 							],
@@ -4374,19 +4346,11 @@
 							"query": [
 								{
 									"key": "request_id",
-									"value": "{{mlc_request_ids}}"
+									"value": "{{mlc_request_id}}"
 								},
 								{
 									"key": "request_id",
-									"value": "{{mlc_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{mlc_request_ids}}"
-								},
-								{
-									"key": "request_id",
-									"value": "{{mlc_request_ids}}"
+									"value": "another_request_id"
 								}
 							]
 						}
@@ -4428,7 +4392,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce81th42nt5lf46egaig\",\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\",\n                \"License Agt\"\n            ]\n        }\n    }\n}"
 						},
@@ -4468,7 +4432,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\"\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\"\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\"\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce81th42nt5lf46egaig\"\n        }\n    }\n}"
 						},
@@ -4508,7 +4472,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\"\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\"\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\"\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce81th42nt5lf46egaig\"\n        }\n    }\n}"
 						},
@@ -4548,7 +4512,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce81sfk2nt5lf46ega4g\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81sfk2nt5lf46ega4g\"\n        },\n        \"ce81sfk2nt5lf46ega50\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81sfk2nt5lf46ega50\"\n        },\n        \"ce81sfk2nt5lf46ega5g\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81sfk2nt5lf46ega5g\"\n        },\n        \"ce81th42nt5lf46egaig\": {\n            \"file_id\": \"ce81tdc2nt5m4fu8khe0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce81th42nt5lf46egaig\"\n        }\n    }\n}"
 						},
@@ -4588,7 +4552,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
 						},
@@ -4628,7 +4592,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
-							"header": [],
+							"header": null,
 							"cookie": [],
 							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
 						}
@@ -4637,7 +4601,7 @@
 			]
 		},
 		{
-			"name": "Normalize",
+			"name": "Normalization",
 			"item": [
 				{
 					"name": "Normalize Currency",
@@ -4712,9 +4676,7 @@
 								{
 									"key": "Content-Type",
 									"value": "application/json",
-									"name": "Content-Type",
-									"description": "",
-									"type": "text"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -4795,9 +4757,7 @@
 								{
 									"key": "Content-Type",
 									"value": "application/json",
-									"name": "Content-Type",
-									"description": "",
-									"type": "text"
+									"description": ""
 								}
 							],
 							"cookie": [],
@@ -4878,9 +4838,7 @@
 								{
 									"key": "Content-Type",
 									"value": "application/json",
-									"name": "Content-Type",
-									"description": "",
-									"type": "text"
+									"description": ""
 								}
 							],
 							"cookie": [],
