@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "b36d80a3-7766-4b76-aee5-7746fd58c86a",
+		"_postman_id": "7b82517d-3b92-49cf-b08f-8714605ebde9",
 		"name": "Zuva DocAI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20632446"
+		"_exporter_id": "20646110",
+		"_collection_link": "https://www.postman.com/zuva-ai/workspace/zuva-api-v2/collection/20632446-7b82517d-3b92-49cf-b08f-8714605ebde9?action=share&source=collection_link&creator=20646110"
 	},
 	"item": [
 		{
@@ -307,6 +308,131 @@
 					]
 				},
 				{
+					"name": "Update File Expiration",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Expiration",
+								"value": "10d"
+							}
+						],
+						"url": {
+							"raw": "{{zdai-base-url}}/files/{{file_id}}/expiration",
+							"host": [
+								"{{zdai-base-url}}"
+							],
+							"path": [
+								"files",
+								"{{file_id}}",
+								"expiration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "File Expiration Updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Expiration",
+										"value": "10d"
+									}
+								],
+								"url": {
+									"raw": "{{zdai-base-url}}/files/{{file_id}}/expiration",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"files",
+										"{{file_id}}",
+										"expiration"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "70"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 15 Dec 2022 21:05:01 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "50"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"file_id\": \"cedok4c2nt5g1deiefl0\",\n    \"expiration\": \"2022-12-25T21:05:01Z\"\n}"
+						},
+						{
+							"name": "File Expiration Not Updated: exceeds maximum allowable extension",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Expiration",
+										"value": "21d"
+									}
+								],
+								"url": {
+									"raw": "{{zdai-base-url}}/files/{{file_id}}/expiration",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"files",
+										"{{file_id}}",
+										"expiration"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "103"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Thu, 15 Dec 2022 21:05:46 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "35"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"code\": \"header-invalid\",\n        \"message\": \"the value specified in the header Expiration is invalid\"\n    }\n}"
+						}
+					]
+				},
+				{
 					"name": "Delete a File",
 					"event": [
 						{
@@ -382,6 +508,146 @@
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"code\": \"file-not-found\",\n    \"message\": \"the specified file does not exist\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Multiple Files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful response.\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{zdai-base-url}}/files?file_id={{file_id}}&file_id=another_id",
+							"host": [
+								"{{zdai-base-url}}"
+							],
+							"path": [
+								"files"
+							],
+							"query": [
+								{
+									"key": "file_id",
+									"value": "{{file_id}}"
+								},
+								{
+									"key": "file_id",
+									"value": "another_id"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/files?file_id={{file_id}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"files"
+									],
+									"query": [
+										{
+											"key": "file_id",
+											"value": "{{file_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "56"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 19 Dec 2022 19:23:31 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "118"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"file_id\": \"cegbkb42nt5g1dep0tn0\",\n        \"status\": \"complete\"\n    }\n]"
+						},
+						{
+							"name": "File not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/files?file_id={{file_id}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"files"
+									],
+									"query": [
+										{
+											"key": "file_id",
+											"value": "{{file_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-length",
+									"value": "79"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 19 Dec 2022 19:22:12 GMT"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "29"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"file_id\": \"cegbjgk2nt5g1dep0rsg\",\n        \"status\": \"failed\",\n        \"error\": \"file-not-found\"\n    }\n]"
 						}
 					]
 				}
@@ -590,15 +856,15 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "json",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [],
-							"body": "{\n    \"request_id\": \"c5e41cgvsl2pp2tpc9i0\",\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\"\n}"
+							"body": "{\n    \"request_id\": \"c5e41cgvsl2pp2tpc9i0\",\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"page_count\": 33,\n    \"character_count\": 128081,\n    \"scan_quality\": \"A\",\n    \"scan_score\": 100\n}"
 						},
 						{
 							"name": "OCR Request Failed",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{zdai-base-url}}/ocr/{{ocr_request_id}}",
@@ -621,7 +887,7 @@
 						{
 							"name": "OCR Request Processing",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{zdai-base-url}}/ocr/{{ocr_request_id}}",
@@ -1291,7 +1557,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "json",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [],
 							"body": "[\n    {\n        \"field_id\": \"c83868ae-269a-4a1b-b2af-c53e5f91efca\",\n        \"name\": \"Governing Law\",\n        \"description\": \"This AI field captures the law that governs an agreement.\",\n        \"bias\": 0,\n        \"f_score\": 0,\n        \"precision\": 0,\n        \"recall\": 0,\n        \"document_count\": 0,\n        \"is_custom\": false,\n        \"is_trained\": true,\n        \"file_ids\": null,\n        \"languages\": [\n            {\n                \"language\": \"English\",\n                \"percentage\": 1\n            }\n        ],\n        \"document_types\": [\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Business Transaction Agt\"\n                ],\n                \"percentage\": 0.20684597\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Credit-Related Agt\"\n                ],\n                \"percentage\": 0.17652811\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Service Agt\"\n                ],\n                \"percentage\": 0.16674817\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"IP Agt\"\n                ],\n                \"percentage\": 0.12469438\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Employment-Related Agt\"\n                ],\n                \"percentage\": 0.09779951\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Supply Agt\"\n                ],\n                \"percentage\": 0.07628362\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Distribution Agt\"\n                ],\n                \"percentage\": 0.045476772\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Real Estate Agt\"\n                ],\n                \"percentage\": 0.0400978\n            },\n            {\n                \"classifications\": [\n                    \"Other\"\n                ],\n                \"percentage\": 0.037652813\n            },\n            {\n                \"classifications\": [\n                    \"Contract\",\n                    \"Governance Agt\"\n                ],\n                \"percentage\": 0.02787286\n            }\n        ],\n        \"jurisdictions\": [\n            {\n                \"country\": {\n                    \"code\": \"US\",\n                    \"name\": \"United States\"\n                },\n                \"regions\": [\n                    \"Texas\",\n                    \"New York\"\n                ]\n            },\n            {\n                \"country\": {\n                    \"code\": \"CA\",\n                    \"name\": \"Canada\"\n                },\n                \"regions\": [\n                    \"Ontario\"\n                ]\n            },\n            {\n                \"country\": {\n                    \"code\": \"GB\",\n                    \"name\": \"United Kingdom\"\n                },\n                \"regions\": [\n                    \"England\"\n                ]\n            },\n            {\n                \"country\": {\n                    \"code\": \"AU\",\n                    \"name\": \"Australia\"\n                }\n            }\n        ],\n        \"tags\": [\n            \"General Commercial\",\n            \"Executive Employment Agreements\",\n            \"Procurement - LPA/LLC\",\n            \"Procurement\",\n            \"Bankruptcy/Recession Planning — General Commercial\",\n            \"Bond Indentures\",\n            \"Credit/Facility Agreements\",\n            \"Brexit (Credit Agreements)\",\n            \"ISDA\",\n            \"Lease Accounting (Equipment)\",\n            \"Real Estate\",\n            \"Bankruptcy/Recession Planning — Credit Agreements\",\n            \"M&A Deal Points (Private Target)\",\n            \"SaaS Agreements\",\n            \"IP and Licensing\",\n            \"M&A Deal Points (Public Target)\",\n            \"M&A Due Diligence\",\n            \"Corporate Organization\",\n            \"Brexit (General Commercial)\",\n            \"Data Protection\",\n            \"IBOR (Credit Agreements)\",\n            \"IBOR (Indentures)\",\n            \"Lease Accounting (Real Estate)\",\n            \"Bankruptcy/Recession Planning — Real Estate Leases\",\n            \"Bankruptcy/Recession Planning — Equipment Leases\",\n            \"Business Associate Agreements\",\n            \"Revenue Recognition\",\n            \"Franchise Agreements\",\n            \"Option Agreements\"\n        ],\n        \"normalization_type\": \"NONE\"\n    }\n]"
@@ -1882,7 +2148,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "json",
+							"_postman_previewlanguage": "Text",
 							"header": [],
 							"cookie": [],
 							"body": "{\n    \"field_id\": \"c83868ae-269a-4a1b-b2af-c53e5f91efca\",\n    \"name\": \"Governing Law\",\n    \"description\": \"This AI field captures the law that governs an agreement.\",\n    \"read_only\": true,\n    \"is_trained\": true,\n    \"file_ids\": [],\n    \"languages\": [\n        {\n            \"language\": \"English\",\n            \"percentage\": 1\n        }\n    ],\n    \"document_types\": [\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Business Transaction Agt\"\n            ],\n            \"percentage\": 0.20684597\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Credit-Related Agt\"\n            ],\n            \"percentage\": 0.17652811\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Service Agt\"\n            ],\n            \"percentage\": 0.16674817\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"IP Agt\"\n            ],\n            \"percentage\": 0.12469438\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Employment-Related Agt\"\n            ],\n            \"percentage\": 0.09779951\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Supply Agt\"\n            ],\n            \"percentage\": 0.07628362\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Distribution Agt\"\n            ],\n            \"percentage\": 0.045476772\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Real Estate Agt\"\n            ],\n            \"percentage\": 0.0400978\n        },\n        {\n            \"classifications\": [\n                \"Other\"\n            ],\n            \"percentage\": 0.037652813\n        },\n        {\n            \"classifications\": [\n                \"Contract\",\n                \"Governance Agt\"\n            ],\n            \"percentage\": 0.02787286\n        }\n    ],\n    \"jurisdictions\": [\n        {\n            \"country\": {\n                \"code\": \"US\",\n                \"name\": \"United States\"\n            },\n            \"regions\": [\n                \"Texas\",\n                \"New York\"\n            ]\n        },\n        {\n            \"country\": {\n                \"code\": \"CA\",\n                \"name\": \"Canada\"\n            },\n            \"regions\": [\n                \"Ontario\"\n            ]\n        },\n        {\n            \"country\": {\n                \"code\": \"GB\",\n                \"name\": \"United Kingdom\"\n            },\n            \"regions\": [\n                \"England\"\n            ]\n        },\n        {\n            \"country\": {\n                \"code\": \"AU\",\n                \"name\": \"Australia\"\n            }\n        }\n    ],\n    \"tags\": [\n        \"General Commercial\",\n        \"Executive Employment Agreements\",\n        \"Procurement - LPA/LLC\",\n        \"Procurement\",\n        \"Bankruptcy/Recession Planning — General Commercial\",\n        \"Bond Indentures\",\n        \"Credit/Facility Agreements\",\n        \"Brexit (Credit Agreements)\",\n        \"ISDA\",\n        \"Lease Accounting (Equipment)\",\n        \"Real Estate\",\n        \"Bankruptcy/Recession Planning — Credit Agreements\",\n        \"M&A Deal Points (Private Target)\",\n        \"SaaS Agreements\",\n        \"IP and Licensing\",\n        \"M&A Deal Points (Public Target)\",\n        \"M&A Due Diligence\",\n        \"Corporate Organization\",\n        \"Brexit (General Commercial)\",\n        \"Data Protection\",\n        \"IBOR (Credit Agreements)\",\n        \"IBOR (Indentures)\",\n        \"Lease Accounting (Real Estate)\",\n        \"Bankruptcy/Recession Planning — Real Estate Leases\",\n        \"Bankruptcy/Recession Planning — Equipment Leases\",\n        \"Business Associate Agreements\",\n        \"Revenue Recognition\",\n        \"Franchise Agreements\",\n        \"Option Agreements\"\n    ],\n    \"normalization_type\": \"NONE\"\n}"
@@ -2570,7 +2836,7 @@
 						{
 							"name": "Field Extraction Request Failed",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{zdai-base-url}}/extraction/{{field_extraction_request_id}}",
@@ -2593,7 +2859,7 @@
 						{
 							"name": "Field Extraction Request Processing",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
 									"raw": "{{zdai-base-url}}/extraction/{{field_extraction_request_id}}",
@@ -3028,1073 +3294,6 @@
 			]
 		},
 		{
-			"name": "Document Classification",
-			"item": [
-				{
-					"name": "Create a Document Classification Request",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"",
-									"pm.test(\"The Document Classification request was created successfully.\", function () {",
-									"    pm.response.to.have.status(202);",
-									"});",
-									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
-									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
-									"    pm.environment.set(\"document_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
-									"",
-									"    // Chaining for when we run the whole collection",
-									"    pm.environment.set(\"test_exp_backoff\", 100);",
-									"    pm.environment.set(\"test_max_attempts\", 20);",
-									"    pm.environment.set(\"test_attempts\", 0);",
-									"    postman.setNextRequest(\"Get Document Classification Request Status\");",
-									"});",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"file_ids\": [\n        \"{{file_id}}\"\n    ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{zdai-base-url}}/classification",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"classification"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Document Classification Request Created",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"file_ids\": [\n        \"c5e41av1qk1er7odm79g\"\n    ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{zdai-base-url}}/classification",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification"
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_ids\": [\n        {\n            \"file_id\": \"c5e41av1qk1er7odm79g\",\n            \"status\": \"queued\",\n            \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n        }\n    ]\n}"
-						}
-					]
-				},
-				{
-					"name": "Get Document Classification Request Status",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"jsonData = pm.response.json()",
-									"",
-									"pm.test(\"The document classification request status was successfully retrieved.\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The document claissification request status returns classification successfully\", function() {",
-									"    if (jsonData[\"status\"] == \"complete\") {",
-									"        pm.expect(jsonData).to.have.property('classification');",
-									"        pm.expect(jsonData).to.have.property('is_contract');",
-									"    }",
-									"",
-									"    // Chaining for when we run the whole collection",
-									"    if (jsonData[\"status\"] == \"complete\"|| jsonData[\"status\"] == \"failed\") {",
-									"        postman.setNextRequest(\"Create a Language Classification Request\");",
-									"        setTimeout(function(){}, 0);",
-									"    } else if (jsonData[\"status\"] == \"queued\" || jsonData[\"status\"] == \"processing\") {",
-									"        if (pm.environment.get(\"test_attempts\") < pm.environment.get(\"test_max_attempts\")) {",
-									"            pm.environment.set(\"test_attempts\", pm.environment.get(\"test_attempts\") + 1)",
-									"            pm.environment.set(\"test_exp_backoff\", Math.min(16000, 2 * pm.environment.get(\"test_exp_backoff\")));",
-									"            console.log(\"setting timeout to \" + pm.environment.get(\"test_exp_backoff\") + \" ms\");",
-									"            setTimeout(function(){}, pm.environment.get(\"test_exp_backoff\"));",
-									"            postman.setNextRequest(\"Get Document Classification Request Status\");",
-									"        } else {",
-									"            console.log(\"timed out\");",
-									"            postman.setNextRequest(\"Create a Language Classification Request\");",
-									"        }",
-									"    }",
-									"})",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"classification",
-								"{{document_classification_request_id}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Document Classification Request Completed",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classification\": \"Real Estate Agt\",\n    \"is_contract\": true\n}"
-						},
-						{
-							"name": "Document Classification Request Failed",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
-						},
-						{
-							"name": "Document Classification Request Processing",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
-						},
-						{
-							"name": "Document Classification Request Queued",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classification/{{document_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classification",
-										"{{document_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Get Multiple Document Classification Request Statuses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"jsonData = pm.response.json()",
-									"",
-									"pm.test(\"The document classification request status was successful.\", function () {",
-									"    pm.response.to.have.status(200);",
-									"    pm.expect(jsonData).to.have.property('num_found');",
-									"    pm.expect(jsonData).to.have.property('num_errors');",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{zdai-base-url}}/classifications?request_id={{document_classification_request_id}}&request_id=another_request_id",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"classifications"
-							],
-							"query": [
-								{
-									"key": "request_id",
-									"value": "{{document_classification_request_id}}"
-								},
-								{
-									"key": "request_id",
-									"value": "another_request_id"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Document Classification Request Completed",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classifications"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68g0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68gg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68h0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68hg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\",\n            \"classification\": \"Intellectual Property Agt\",\n            \"is_contract\": true\n        }\n    }\n}"
-						},
-						{
-							"name": "Document Classification Request Failed",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classifications"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68g0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68gg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68h0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68hg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Document Classification Request Processing",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classifications"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68g0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68gg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68h0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68hg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Document Classification Request Queued",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classifications"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68g0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68gg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68h0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68hg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        },\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68hg\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Retrieval failed due to invalid request_id",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classifications"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68g0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68gg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68h0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68hg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
-						},
-						{
-							"name": "Retrieval failed due to request_id not found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/classifications?request_id=ce7m85s2nt5r5uan68g0&request_id=ce7m85s2nt5r5uan68gg&request_id=ce7m85s2nt5r5uan68h0&request_id=ce7m85s2nt5r5uan68hg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"classifications"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68g0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68gg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68h0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7m85s2nt5r5uan68hg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 3,\n    \"num_errors\": 1,\n    \"statuses\": {\n        \"ce7m85s2nt5r5uan68g0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68g0\"\n        },\n        \"ce7m85s2nt5r5uan68gg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68gg\"\n        },\n        \"ce7m85s2nt5r5uan68h0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7m85s2nt5r5uan68h0\"\n        }\n    },\n    \"errors\": {\n        \"ce7m85s2nt5r5uan68hg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Language Classification",
-			"item": [
-				{
-					"name": "Create a Language Classification Request",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = pm.response.json();",
-									"",
-									"pm.test(\"The Language Classification request was created successfully.\", function () {",
-									"    pm.response.to.have.status(202);",
-									"});",
-									"",
-									"pm.test(\"The response contains a request_id.\", function () {",
-									"    pm.expect(jsonData[\"file_ids\"][0]).to.have.property('request_id');",
-									"    pm.environment.set(\"language_classification_request_id\", jsonData[\"file_ids\"][0][\"request_id\"]);",
-									"",
-									"    // Chaining for when we run the whole collection",
-									"    pm.environment.set(\"test_exp_backoff\", 100);",
-									"    pm.environment.set(\"test_max_attempts\", 20);",
-									"    pm.environment.set(\"test_attempts\", 0);",
-									"    postman.setNextRequest(\"Get Language Classification Request Status\");",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"file_ids\": [\n        \"{{file_id}}\"\n    ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{zdai-base-url}}/language",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"language"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Language Classification Request Created",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"file_ids\": [\n        \"c5e41av1qk1er7odm79g\"\n    ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{zdai-base-url}}/language",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"language"
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_ids\": [\n        {\n            \"file_id\": \"c5e41av1qk1er7odm79g\",\n            \"status\": \"queued\",\n            \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n        }\n    ]\n}"
-						}
-					]
-				},
-				{
-					"name": "Get Language Classification Request Status",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"jsonData = pm.response.json()",
-									"",
-									"pm.test(\"The language classification request status was successfully retrieved.\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The language classification request status returns classification successfully\", function() {",
-									"    if (jsonData[\"status\"] == \"complete\") {",
-									"        pm.expect(jsonData).to.have.property('language');",
-									"    }",
-									"",
-									"    // Chaining for when we run the whole collection",
-									"    if (jsonData[\"status\"] == \"complete\"|| jsonData[\"status\"] == \"failed\") {",
-									"        postman.setNextRequest(null);",
-									"        setTimeout(function(){}, 0);",
-									"    } else if (jsonData[\"status\"] == \"queued\" || jsonData[\"status\"] == \"processing\") {",
-									"        if (pm.environment.get(\"test_attempts\") < pm.environment.get(\"test_max_attempts\")) {",
-									"            pm.environment.set(\"test_attempts\", pm.environment.get(\"test_attempts\") + 1)",
-									"            pm.environment.set(\"test_exp_backoff\", Math.min(16000, 2 * pm.environment.get(\"test_exp_backoff\")));",
-									"            console.log(\"setting timeout to \" + pm.environment.get(\"test_exp_backoff\") + \" ms\");",
-									"            setTimeout(function(){}, pm.environment.get(\"test_exp_backoff\"));",
-									"            postman.setNextRequest(\"Get Language Classification Request Status\");",
-									"        } else {",
-									"            console.log(\"timed out\");",
-									"            postman.setNextRequest(null);",
-									"        }",
-									"    }",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"language",
-								"{{language_classification_request_id}}"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Language Classification Request Completed",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"language",
-										"{{language_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\",\n    \"language\": \"English\"\n}"
-						},
-						{
-							"name": "Language Classification Request Failed",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"language",
-										"{{language_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"failed\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n}"
-						},
-						{
-							"name": "Language Classification Request Processing",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"language",
-										"{{language_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"processing\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n}"
-						},
-						{
-							"name": "Language Classification Request Queued",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/language/{{language_classification_request_id}}",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"language",
-										"{{language_classification_request_id}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [],
-							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e45a8vsl2ss5f0vmdg\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Get Multiple Language Classification Request Statuses",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"jsonData = pm.response.json()",
-									"",
-									"pm.test(\"The language classification request status was successful.\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"The language classification request status returns classification successfully\", function() {",
-									"    if (jsonData[\"status\"] == \"complete\") {",
-									"        pm.expect(jsonData).to.have.property('language');",
-									"    }",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{zdai-base-url}}/languages?request_id={{language_classification_request_id}}&request_id=another_request_id",
-							"host": [
-								"{{zdai-base-url}}"
-							],
-							"path": [
-								"languages"
-							],
-							"query": [
-								{
-									"key": "request_id",
-									"value": "{{language_classification_request_id}}"
-								},
-								{
-									"key": "request_id",
-									"value": "another_request_id"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Language Classification Request Completed",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"languages"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltc0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltcg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltb0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltbg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\",\n            \"language\": \"English\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"complete\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\",\n            \"language\": \"English\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Language Classification Request Failed",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"languages"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltc0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltcg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltb0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltbg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"failed\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Language Classification Request Processing",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"languages"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltc0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltcg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltb0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltbg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"processing\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Language Classification Request Queued",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"languages"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltc0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltcg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltb0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltbg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        },\n        \"ce7md32pkarab6ciltcg\": {\n            \"file_id\": \"ce7ks8ib08o78qsc6r1g\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltcg\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Retrieval failed due to invalid request_id",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"languages"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltc0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltcg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltb0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltbg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        }\n    },\n    \"errors\": {\n        \"ce7md32pkarab6ciltcg\": {\n            \"error\": {\n                \"code\": \"invalid_request_id_format\",\n                \"message\": \"The request ID provided is not in desired format\"\n            }\n        }\n    }\n}"
-						},
-						{
-							"name": "Retrieval failed due to request_id not found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{zdai-base-url}}/languages?request_id=ce7md32pkarab6ciltc0&request_id=ce7md32pkarab6ciltcg&request_id=ce7md32pkarab6ciltb0&request_id=ce7md32pkarab6ciltbg",
-									"host": [
-										"{{zdai-base-url}}"
-									],
-									"path": [
-										"languages"
-									],
-									"query": [
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltc0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltcg"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltb0"
-										},
-										{
-											"key": "request_id",
-											"value": "ce7md32pkarab6ciltbg"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": null,
-							"cookie": [],
-							"body": "{\n    \"num_found\": 4,\n    \"num_errors\": 0,\n    \"statuses\": {\n        \"ce7md32pkarab6ciltb0\": {\n            \"file_id\": \"ce7ks02b08o78qsc6qog\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltb0\"\n        },\n        \"ce7md32pkarab6ciltbg\": {\n            \"file_id\": \"ce7ks3qb08o78qsc6qsg\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltbg\"\n        },\n        \"ce7md32pkarab6ciltc0\": {\n            \"file_id\": \"ce7ks62b08o78qsc6qv0\",\n            \"status\": \"queued\",\n            \"request_id\": \"ce7md32pkarab6ciltc0\"\n        }\n    },\n    \"errors\": {\n        \"ce7md32pkarab6ciltcg\": {\n            \"error\": {\n                \"code\": \"request_not_found\",\n                \"message\": \"The specified request ID cannot be found\"\n            }\n        }\n    }\n}"
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "Multi-Level Classification",
 			"item": [
 				{
@@ -4220,7 +3419,7 @@
 					},
 					"response": [
 						{
-							"name": "MLC Request Completed",
+							"name": "MLC Request Complete - Contract",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
@@ -4240,7 +3439,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"complete\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\",\n    \"classifications\": [\n        \"Contract\",\n        \"IP Agt\",\n        \"License Agt\"\n    ]\n}"
+							"body": "{\n    \"file_id\": \"cj5943ldolic73drdphg\",\n    \"status\": \"complete\",\n    \"request_id\": \"cj5945k30u1s73esunbg\",\n    \"classifications\": [\n        \"Contract\",\n        \"Real Estate Agt\",\n        \"Real Estate Lease\"\n    ],\n    \"language\": {\n        \"code\": \"en\",\n        \"name\": \"English\"\n    },\n    \"is_amendment\": true,\n    \"is_master_agreement\": false\n}"
 						},
 						{
 							"name": "MLC Request Failed",
@@ -4310,6 +3509,54 @@
 							"header": null,
 							"cookie": [],
 							"body": "{\n    \"file_id\": \"c5e41av1qk1er7odm79g\",\n    \"status\": \"queued\",\n    \"request_id\": \"c5e43kf1qk1bstse6nrg\"\n}"
+						},
+						{
+							"name": "MLC Request Complete - Non-Contract",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{zdai-base-url}}/mlc/{{mlc_request_id}}",
+									"host": [
+										"{{zdai-base-url}}"
+									],
+									"path": [
+										"mlc",
+										"{{mlc_request_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "date",
+									"value": "Wed, 02 Aug 2023 17:30:28 GMT"
+								},
+								{
+									"key": "content-length",
+									"value": "176"
+								},
+								{
+									"key": "x-envoy-upstream-service-time",
+									"value": "5"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "server",
+									"value": "istio-envoy"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"file_id\": \"cj595a5dolic73drdqj0\",\n    \"status\": \"complete\",\n    \"request_id\": \"cj595bokio0s738bfneg\",\n    \"classifications\": [\n        \"Non-Contract\",\n        \"Letter\"\n    ],\n    \"language\": {\n        \"code\": \"en\",\n        \"name\": \"English\"\n    }\n}"
 						}
 					]
 				},
