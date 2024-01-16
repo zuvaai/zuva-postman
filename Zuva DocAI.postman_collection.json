@@ -210,7 +210,7 @@
 								"exec": [
 									"var jsonData = pm.response.json();",
 									"",
-									"pm.test(\"The ZuvaOCR file was submitted successfully.\", function () {",
+									"pm.test(\"The eOCR file was submitted successfully.\", function () {",
 									"    pm.response.to.have.status(201);",
 									"});",
 									"",
@@ -236,7 +236,7 @@
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": "CANADAGOOS-F1Securiti-2152017.zuvaocr"
+								"src": "CANADAGOOS-F1Securiti-2152017.eocr"
 							}
 						},
 						"url": {
@@ -264,7 +264,7 @@
 								"body": {
 									"mode": "file",
 									"file": {
-										"src": "CANADAGOOS-F1Securiti-2152017.zuvaocr"
+										"src": "CANADAGOOS-F1Securiti-2152017.eocr"
 									}
 								},
 								"url": {
